@@ -44,7 +44,6 @@ public class GisService extends Service {
         return null;
     }
 
-    //поток работы с сетью
     private class GisAsyncTask extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -61,9 +60,7 @@ public class GisService extends Service {
                 int count;
                 URL url = new URL("http://kanashen.ru/category/%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8/feed/");
                 Scanner scanner = new Scanner((InputStream) url.getContent());
-                while (scanner.hasNext()) {
-                    result = scanner.nextLine();
-                }
+                result = scanner.nextLine();
             } catch (Exception e) {
                 result = e.toString();
             }
