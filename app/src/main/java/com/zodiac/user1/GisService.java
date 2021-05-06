@@ -64,7 +64,7 @@ public class GisService extends Service {
                 int count;
                 URL url = new URL("http://kanashen.ru/category/%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8/feed/");
                 Scanner scanner = new Scanner((InputStream) url.getContent());
-                for (count = 27;count < 43;count ++) {
+                for (count = 1;count < 16;count ++) {
                   //  while (scanner.hasNext()) {
                         result = scanner.nextLine();
                        // count++;
