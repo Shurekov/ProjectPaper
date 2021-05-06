@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         //listView = findViewById(R.id.listView);
         testText = findViewById(R.id.testText);
+        listView = findViewById(R.id.listView);
         registerReceiver(receiver, new IntentFilter(GisService.CHANNEL));
         Intent intent = new Intent(this, GisService.class);
         startService(intent);
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<Item> items = new ArrayList<Item>();
 
             try{
+
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
                 XmlPullParser xpp = factory.newPullParser();
@@ -80,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
                                     items.add(currentItem);
                                     inEntry = false;} else if("title".equalsIgnoreCase(tagName)){
                                     currentItem.setTitle(textValue);
-                                } else if("comments".equalsIgnoreCase(tagName)){
+                                } else if("description".equalsIgnoreCase(tagName)){
                                     currentItem.setDescription(textValue);
-                                }else if("pubDate".equalsIgnoreCase(tagName)){
+                                 }else if("pubDate".equalsIgnoreCase(tagName)){
                                     currentItem.setPubDate(textValue);
                                 }
                             }

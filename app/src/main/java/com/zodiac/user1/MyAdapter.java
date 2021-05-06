@@ -28,12 +28,12 @@ public class MyAdapter extends ArrayAdapter<Item> {
         }
         Item item = getItem(position);
         if (item != null){
-            TextView email  = convertView.findViewById(R.id.email);
-            email.setText(item.getTitle());
-            TextView name  = convertView.findViewById(R.id.name);
-            name.setText(item.getDescription());
-            TextView surname  = convertView.findViewById(R.id.surname);
-            surname.setText(item.getPubDate());
+            TextView title  = convertView.findViewById(R.id.title);
+            title.setText(item.getTitle());
+            TextView description  = convertView.findViewById(R.id.description);
+            description.setText(item.getDescription());
+            TextView pubDate  = convertView.findViewById(R.id.pubDate);
+            pubDate.setText(item.getPubDate());
         }
         return convertView;
     }
