@@ -55,12 +55,14 @@ public class GisService extends Service {
 
         @Override
         protected String doInBackground(Void... voids) {
-            String result = null;
+            String result = "";
             try {
                 int count;
                 URL url = new URL("http://kanashen.ru/category/%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8/feed/");
                 Scanner scanner = new Scanner((InputStream) url.getContent());
-                result = scanner.nextLine();
+                while (scanner.hasNextLine()){
+                    result = result + scanner.nextLine() + "\n";
+                }
             } catch (Exception e) {
                 result = e.toString();
             }

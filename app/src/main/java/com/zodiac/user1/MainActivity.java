@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //listView = findViewById(R.id.listView);
-        testText = findViewById(R.id.testText);
         listView = findViewById(R.id.listView);
         registerReceiver(receiver, new IntentFilter(GisService.CHANNEL));
         Intent intent = new Intent(this, GisService.class);
@@ -60,11 +58,9 @@ public class MainActivity extends AppCompatActivity {
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
                 XmlPullParser xpp = factory.newPullParser();
-                testText.setText(intent.getStringExtra(GisService.INFO));
                 xpp.setInput(new StringReader(intent.getStringExtra(GisService.INFO)));
                 int eventType = xpp.getEventType();
                 while(eventType != XmlPullParser.END_DOCUMENT){
-
                     String tagName = xpp.getName();
                     switch (eventType){
                         case XmlPullParser.START_TAG:
