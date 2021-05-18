@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 
@@ -29,10 +31,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = findViewById(R.id.listView);
-        registerReceiver(receiver, new IntentFilter(GisService.CHANNEL));
-        Intent intent = new Intent(this, GisService.class);
+        testText = findViewById(R.id.testtext);
+//        registerReceiver(receiver, new IntentFilter(GisService.CHANNEL));
+        final Intent intent = new Intent(this, GisService.class);
         startService(intent);
 
+
+        testText.setText("Загрузка...");
+        new Thread(new Runnable() {
+            public void run() {
+                 final String content = intent.getStringExtra(GisService.INFO);
+                listView.post(new Runnable() {
+                    public void run() {
+                        UserXmlParser parser = new UserXmlParser();
+                        if(parser.parse(content))
+                        {
+                            ArrayAdapter<Item> adapter = new ArrayAdapter(getBaseContext(),
+                                    android.R.layout.simple_list_item_1, parser.getItems());
+                            listView.setAdapter(adapter);
+                            testText.setText("Загруженно объектов: " + adapter.getCount());
+                        }
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override
@@ -41,9 +63,25 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GisService.class);
         stopService(intent);
     }
+}
 
 
-    protected BroadcastReceiver receiver = new BroadcastReceiver() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* protected BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -94,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 status = false;
                 e.printStackTrace();
             }
+            int i =1;
         }
-    };
-}
+  };
+        */

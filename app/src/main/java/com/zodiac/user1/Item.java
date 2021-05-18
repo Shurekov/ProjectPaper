@@ -11,6 +11,7 @@ public class Item {
         this.pubDate = pubDate;
     }
 
+
     public String getTitle() {
         return title;
     }
