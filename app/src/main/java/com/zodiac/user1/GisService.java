@@ -1,10 +1,13 @@
 package com.zodiac.user1;
 
 
+import android.app.Application;
 import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.io.InputStream;
 import java.net.URL;
@@ -17,7 +20,7 @@ public class GisService extends Service {
 
     @Override
     public void onCreate() {
-        // сообщение о создании службы
+        // сообщение о создании служб;
      //   Toast.makeText(this, "Service created", Toast.LENGTH_SHORT).show();
     }
 
@@ -50,7 +53,7 @@ public class GisService extends Service {
         protected void onPostExecute(String aVoid) {
             Intent i = new Intent(CHANNEL);
             i.putExtra(INFO, aVoid);
-            sendBroadcast(i); // рассылаем
+            sendBroadcast(i); // рассылае
         }
 
         @Override

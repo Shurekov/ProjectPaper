@@ -29,32 +29,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         listView = findViewById(R.id.listView);
         testText = findViewById(R.id.testtext);
-//        registerReceiver(receiver, new IntentFilter(GisService.CHANNEL));
+        registerReceiver(receiver, new IntentFilter(GisService.CHANNEL));
         final Intent intent = new Intent(this, GisService.class);
         startService(intent);
-
-
-        testText.setText("Загрузка...");
-        new Thread(new Runnable() {
-            public void run() {
-                 final String content = intent.getStringExtra(GisService.INFO);
-                listView.post(new Runnable() {
-                    public void run() {
-                        UserXmlParser parser = new UserXmlParser();
-                        if(parser.parse(content))
-                        {
-                            ArrayAdapter<Item> adapter = new ArrayAdapter(getBaseContext(),
-                                    android.R.layout.simple_list_item_1, parser.getItems());
-                            listView.setAdapter(adapter);
-                            testText.setText("Загруженно объектов: " + adapter.getCount());
-                        }
-                    }
-                });
-            }
-        }).start();
     }
 
     @Override
@@ -63,6 +42,24 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GisService.class);
         stopService(intent);
     }
+
+    protected BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String content = intent.getStringExtra(GisService.INFO);
+            listView.post(new Runnable() {
+                public void run() {
+                    UserXmlParser parser = new UserXmlParser();
+                    if(parser.parse(content)) {
+                        ArrayAdapter<Item> adapter = new ArrayAdapter(getBaseContext(),
+                                android.R.layout.simple_list_item_1, parser.getItems());
+                        listView.setAdapter(adapter);
+                        testText.setText("Загруженно объектов: " + adapter.getCount());
+                    }
+                }
+            });
+        }
+    };
 }
 
 
