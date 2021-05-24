@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                         ArrayAdapter<Item> adapter = new MyAdapter(getBaseContext(),
                                 R.layout.list_item_layout, parser.getItems().toArray(new Item[0]));
                         listView.setAdapter(adapter);
-                        testText.setText("Загруженно объектов: " + adapter.getCount());
                     }
                 }
             });
