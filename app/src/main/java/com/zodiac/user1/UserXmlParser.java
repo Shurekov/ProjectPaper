@@ -29,8 +29,10 @@ public class UserXmlParser {
         if (xmlData == null)
             return false;
         Document doc = Jsoup.parse(xmlData, "", Parser.xmlParser());
-        for (Element e : doc.select("item > title")) {
-            items.add(new Item(e.text()));
+        for (Element e : doc.select("item")) {
+            items.add(new Item( e.selectFirst("title").text(),
+                                e.selectFirst("description").text(),
+                                e.selectFirst("pubDate").text()));
         }
         return true;
     }

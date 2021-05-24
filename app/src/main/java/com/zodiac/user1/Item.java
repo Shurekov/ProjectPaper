@@ -5,7 +5,7 @@ public class Item {
     private String description;
     private String pubDate;
 
-    public Item() {
+    public Item(String title, String description, String pubDate) {
         this.title = title;
         this.description = description;
         this.pubDate = pubDate;
@@ -40,7 +40,7 @@ public class Item {
         this.pubDate = pubDate;
     }
 
-    public String toString(){
-        return  "Item: " + title + "\n" + description +"\n"+pubDate ;
+    public String toString() {
+        return  "Заголовок: " + title + "\n" + description +"\nДата:"+pubDate ;
     }
 }

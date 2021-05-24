@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     UserXmlParser parser = new UserXmlParser();
                     if(parser.parse(content)) {
-                        ArrayAdapter<Item> adapter = new ArrayAdapter(getBaseContext(),
-                                android.R.layout.simple_list_item_1, parser.getItems());
+                        ArrayAdapter<Item> adapter = new MyAdapter(getBaseContext(),
+                                R.layout.list_item_layout, parser.getItems().toArray(new Item[0]));
                         listView.setAdapter(adapter);
                         testText.setText("Загруженно объектов: " + adapter.getCount());
                     }

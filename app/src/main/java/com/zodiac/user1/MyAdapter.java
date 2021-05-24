@@ -35,6 +35,7 @@ public class MyAdapter extends ArrayAdapter<Item> {
             TextView pubDate  = convertView.findViewById(R.id.pubDate);
             pubDate.setText(item.getPubDate());
         }
+        System.out.println(convertView.getHeight());
         return convertView;
     }
 }
