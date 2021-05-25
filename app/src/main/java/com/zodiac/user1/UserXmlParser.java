@@ -31,7 +31,7 @@ public class UserXmlParser {
         Document doc = Jsoup.parse(xmlData, "", Parser.xmlParser());
         for (Element e : doc.select("item")) {
             items.add(new Item( e.selectFirst("title").text(),
-                                e.selectFirst("description").text(),
+                                e.selectFirst("description").text().replace("&#160;"," "),
                                 e.selectFirst("pubDate").text()));
         }
         return true;
