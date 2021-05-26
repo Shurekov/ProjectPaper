@@ -47,7 +47,6 @@ public class MyAdapter extends ArrayAdapter<Item>  {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(myContext, "hjfk", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(myContext,SingleNewsActivity.class);
                 intent.putExtra("title", item.getTitle());
                 intent.putExtra("link", item.getLink());

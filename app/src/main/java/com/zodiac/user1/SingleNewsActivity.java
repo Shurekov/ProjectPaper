@@ -2,6 +2,7 @@ package com.zodiac.user1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -14,13 +15,15 @@ import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Scanner;
 
 public class SingleNewsActivity extends AppCompatActivity {
 
     TextView titleOfNews;
     TextView mainNews;
     Bundle bundle;
-//   String news = getIntent().getStringExtra("link");
     String news;
 
     @Override
@@ -30,32 +33,36 @@ public class SingleNewsActivity extends AppCompatActivity {
         titleOfNews = findViewById(R.id.titleOfNews);
         mainNews = findViewById(R.id.news);
         bundle = getIntent().getExtras();
-//   String news = getIntent().getStringExtra("link");
         news = bundle.get("link").toString();
-        NewsAsynсTask newsAsynсTask = new NewsAsynсTask();
-        newsAsynсTask.execute();
-        mainNews.setText(ыуыуыу.text());
-//        titleOfNews.setText(getIntent().getStringExtra(MyAdapter.class));
-        
+
+        NewsAsyncTask newsAsyncTask = new NewsAsyncTask();
+        newsAsyncTask.execute();
     }
 
-    private class NewsAsynсTask extends AsyncTask<Void,Void,String>{
+    private class NewsAsyncTask extends AsyncTask<Void, Void, Document> {
 
         @Override
-        protected String doInBackground(Void... voids) {
-            try {
-            Document doc = Jsoup.connect(news).get();
-            Elements listNews = doc.select("div class.entry-content");
-                for (Element element : listNews.select("p")){
-                    element = element + li
-                }
-        } catch (IOException e) {
-            e.printStackTrace();
+        protected void onPostExecute(Document doc) {
+            Elements listNews = doc.select("div.entry-content");
+            System.out.println(listNews);
+            for (Element element : listNews.select("p")) {
+                mainNews.setText(mainNews.getText() + element.text() + "\n\n");
+            }
+
+            Element title = doc.selectFirst("h1.entry-title");
+            titleOfNews.setText(title.text());
+            titleOfNews.setTextSize(28);
         }
+
+        @Override
+        protected Document doInBackground(Void... voids) {
+            try {
+                Document doc = Jsoup.connect(news).get();
+                return doc;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return null;
         }
     }
-
-
-
 }
