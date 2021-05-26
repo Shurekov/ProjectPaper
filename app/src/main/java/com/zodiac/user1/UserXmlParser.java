@@ -32,7 +32,8 @@ public class UserXmlParser {
         for (Element e : doc.select("item")) {
             items.add(new Item( e.selectFirst("title").text(),
                                 e.selectFirst("description").text().replace("&#160;"," "),
-                                e.selectFirst("pubDate").text()));
+                                e.selectFirst("pubDate").text(),
+                                e.selectFirst("link").text()));
         }
         return true;
     }

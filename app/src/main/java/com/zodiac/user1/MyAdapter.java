@@ -27,6 +27,7 @@ public class MyAdapter extends ArrayAdapter<Item>  {
 
     }
 
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -47,9 +48,11 @@ public class MyAdapter extends ArrayAdapter<Item>  {
             @Override
             public void onClick(View view) {
                 Toast.makeText(myContext, "hjfk", Toast.LENGTH_SHORT).show();
-                Item item = getItem(position);
                 Intent intent = new Intent(myContext,SingleNewsActivity.class);
                 intent.putExtra("title", item.getTitle());
+                intent.putExtra("link", item.getLink());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                myContext.startActivity(intent);
 
             }
         });

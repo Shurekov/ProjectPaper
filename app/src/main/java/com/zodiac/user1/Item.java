@@ -4,17 +4,14 @@ public class Item {
     private String title;
     private String description;
     private String pubDate;
+    private String link;
 
-    public Item(String title, String description, String pubDate) {
+    public Item(String title, String description, String pubDate, String link) {
         this.title = title;
         this.description = description;
         this.pubDate = pubDate;
+        this.link = link;
     }
-
-    public Item(String title) {
-        this.title = title;
-    }
-
 
     public String getTitle() {
         return title;
@@ -40,7 +37,15 @@ public class Item {
         this.pubDate = pubDate;
     }
 
-    public String toString() {
-        return  "Заголовок: " + title + "\n" + description +"\nДата:"+pubDate ;
+    public String getLink() {
+        return link;
     }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+//    public String toString() {
+//        return  "Заголовок: " + title + "\n" + description +"\nДата:"+pubDate ;
+//    }
 }
