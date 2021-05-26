@@ -2,8 +2,10 @@ package com.zodiac.user1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,19 +32,30 @@ public class SingleNewsActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
 //   String news = getIntent().getStringExtra("link");
         news = bundle.get("link").toString();
+        NewsAsynсTask newsAsynсTask = new NewsAsynсTask();
+        newsAsynсTask.execute();
+        mainNews.setText(ыуыуыу.text());
 //        titleOfNews.setText(getIntent().getStringExtra(MyAdapter.class));
-        parse();
+        
     }
-    public boolean parse() {
-        try {
+
+    private class NewsAsynсTask extends AsyncTask<Void,Void,String>{
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
             Document doc = Jsoup.connect(news).get();
             Elements listNews = doc.select("div class.entry-content");
-            for (Element element : listNews.select("p")){
-                mainNews.setText(element.text());
-            }
+                for (Element element : listNews.select("p")){
+                    element = element + li
+                }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+            return null;
+        }
     }
+
+
+
 }
