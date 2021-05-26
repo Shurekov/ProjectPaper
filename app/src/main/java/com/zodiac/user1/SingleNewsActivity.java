@@ -17,9 +17,9 @@ public class SingleNewsActivity extends AppCompatActivity {
 
     TextView titleOfNews;
     TextView mainNews;
-    Bundle bundle = getIntent().getExtras();
+    Bundle bundle;
 //   String news = getIntent().getStringExtra("link");
-    String news = bundle.get("link").toString();
+    String news;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,13 @@ public class SingleNewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_news);
         titleOfNews = findViewById(R.id.titleOfNews);
         mainNews = findViewById(R.id.news);
+        bundle = getIntent().getExtras();
+//   String news = getIntent().getStringExtra("link");
+        news = bundle.get("link").toString();
 //        titleOfNews.setText(getIntent().getStringExtra(MyAdapter.class));
+        parse();
     }
-    public boolean parse(String xmlData) {
+    public boolean parse() {
         try {
             Document doc = Jsoup.connect(news).get();
             Elements listNews = doc.select("div class.entry-content");
