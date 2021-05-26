@@ -2,6 +2,7 @@ package com.zodiac.user1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class SingleNewsActivity extends AppCompatActivity {
 
     private class NewsAsyncTask extends AsyncTask<Void, Void, Document> {
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(Document doc) {
             Elements listNews = doc.select("div.entry-content");
@@ -50,7 +52,7 @@ public class SingleNewsActivity extends AppCompatActivity {
             }
 
             Element title = doc.selectFirst("h1.entry-title");
-            titleOfNews.setText(title.text());
+            titleOfNews.setText(title.text()+ '\n');
             titleOfNews.setTextSize(28);
         }
 

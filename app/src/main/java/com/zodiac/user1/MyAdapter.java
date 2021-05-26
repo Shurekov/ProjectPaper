@@ -1,5 +1,6 @@
 package com.zodiac.user1;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -28,6 +29,7 @@ public class MyAdapter extends ArrayAdapter<Item>  {
     }
 
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -38,7 +40,7 @@ public class MyAdapter extends ArrayAdapter<Item>  {
         final Item item = getItem(position);
         if (item != null){
             TextView title  = convertView.findViewById(R.id.title);
-            title.setText(item.getTitle());
+            title.setText(item.getTitle()+ '\n');
             TextView description  = convertView.findViewById(R.id.description);
             description.setText(item.getDescription());
             TextView pubDate  = convertView.findViewById(R.id.pubDate);
