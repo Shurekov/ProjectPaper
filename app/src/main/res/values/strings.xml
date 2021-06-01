@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Новости - Газета Канаш</string>
     <string name="welcome">Добро пожаловать</string>
+    <string name="send_button_name">Отправить</string>
     <string name="web">Офицальный сайт - http://kanashen.ru</string>
-
+    <string-array name="catNames">
+        <item>Барсик</item>
+        <item>Мурзик</item>
+        <item>Васька</item>
+        <item>Рыжик</item>
+    </string-array>
 </resources>
