@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/message_item"
+            android:id="@+id/same_message"
             android:text="myMessage"
             android:textSize="20dp"
             android:padding="4dp"/>

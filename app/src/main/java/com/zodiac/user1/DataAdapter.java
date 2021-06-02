@@ -12,11 +12,11 @@ import java.util.ArrayList;
 
 public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-    ArrayList<String> messages;
+    ArrayList<String> messages;  //  Храниние строк
 
     LayoutInflater inflater;
 
-    public DataAdapter(Context context, ArrayList<String> messages) {
+    public DataAdapter(Context context, ArrayList<String> messages) {   //  Получение возможности от активности использовать LayoutInflater, для создания объекта
         this.messages = messages;
         this.inflater = LayoutInflater.from(context);
     }
@@ -25,19 +25,19 @@ public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.item_message, parent, false);
+        View view = inflater.inflate(R.layout.element_message, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {    //  Метод отвечающий за прокрутку
         String msg = messages.get(position);
         holder.message.setText(msg);
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount() {   //  Метод сообщающий кол-во элементов, для корректного отображения ленты
         return messages.size();
     }
 }

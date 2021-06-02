@@ -23,15 +23,15 @@
   <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введите сообщение"
+        android:hint="@string/enter_text"
         android:id="@+id/message_input"
-      android:textSize="24dp"/>
+      android:textSize="23dp"/>
      <Button
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:id="@+id/send_message_b"
-         android:text="@string/send_button_name"
-         android:textSize="24dp"/>
+         android:id="@+id/send_button"
+         android:text="@string/send_button"
+         android:textSize="23dp"/>
 
     </LinearLayout>
 

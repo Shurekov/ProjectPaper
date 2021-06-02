@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static int MAX_MESSAGE_SIZE = 100;
+    private static int MAX_TEXT_SIZE = 100;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("messages");
 
@@ -35,7 +35,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        SendButton = findViewById(R.id.send_message_b);
+        SendButton = findViewById(R.id.send_button);
         EditTextMessage = findViewById(R.id.message_input);
         MessagesRecycler = findViewById(R.id.messages_recycler);
 
@@ -58,12 +58,12 @@ public class ChatActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(msg.length() > MAX_MESSAGE_SIZE){
+                if(msg.length() > MAX_TEXT_SIZE){
                     Toast.makeText(getApplicationContext(), "Сообщение превысило 100 символов.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                myRef.push().setValue(msg);
+                myRef.push().setValue(msg);   //  Создание объекта msg, в который будут добавляться сообщения с помощью метода push
                 EditTextMessage.setText("");
 
             }
@@ -71,11 +71,11 @@ public class ChatActivity extends AppCompatActivity {
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {   //  Этот метод запускается при добавлении нового дочернего элемента в расположение, в которое был добавлен этот прослушиватель.
                 String msg = dataSnapshot.getValue(String.class);
-                messages.add(msg);
-                dataAdapter.notifyDataSetChanged();
-                MessagesRecycler.smoothScrollToPosition(messages.size());
+                messages.add(msg);   //  Добавление сообщений в ArrayList
+                dataAdapter.notifyDataSetChanged();   //  Перересовка сообщений после их добавления
+                MessagesRecycler.smoothScrollToPosition(messages.size());   //  Автоматическая прокрутка ленты вниз
             }
 
             @Override
